@@ -1,1 +1,1 @@
-# study Django REST Framework
+# Study Django REST Framework

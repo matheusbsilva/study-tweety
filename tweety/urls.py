@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets 
+from posts import views
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
@@ -28,10 +29,11 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 router = routers.DefaultRouter()
-router.register(r'users', UserViewSet) 
+router.register(r'users', UserViewSet) # Not using right now 
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^posts/$', views.post_list),
+    url(r'^posts/(?P<pk>[0-9]+)/$', views.post_detail),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

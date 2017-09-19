@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets 
+from rest_framework.urlpatterns import format_suffix_patterns
 from posts import views
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -37,3 +38,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+#Don't necessarily need to add these extra url patterns in,
+#but it give us a simple, clean way of referring to a specific format
+urlpatterns = format_suffix_patterns(urlpatterns)

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from rest_framework.decorators import api_view 
+from rest_framework import status
 
 # Set permission for request of methods(permission_classes decorator)
 from rest_framework.decorators import permission_classes 
@@ -22,8 +23,8 @@ def post_list(request, format=None):
         serializer = PostSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET','PUT','DELETE'])
 @permission_classes((permissions.AllowAny,))
@@ -47,4 +48,4 @@ def post_detail(request, pk, format=None):
 
     elif request.method == 'DELETE':
         post.delete()
-        return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+        return Response(status=status.HTTP_204_NO_CONTENT)

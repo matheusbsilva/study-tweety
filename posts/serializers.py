@@ -7,8 +7,7 @@ class PostSerializer(serializers.ModelSerializer):
         fields = ('id','text','likes','owner')
 
     def create(self, validated_data):
-        post = Post(validated_data)
-        return post.save() 
+        return Post.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
         instance.text = validated_data.get('text', instance.text)

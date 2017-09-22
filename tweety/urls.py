@@ -33,8 +33,8 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet) # Not using right now 
 
 urlpatterns = [
-    url(r'^posts/$', views.post_list),
-    url(r'^posts/(?P<pk>[0-9]+)/$', views.post_detail),
+    url(r'^posts/$', views.PostList.as_view()),
+    url(r'^posts/(?P<pk>[0-9]+)/$', views.PostDetail.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

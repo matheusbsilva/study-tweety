@@ -1,10 +1,25 @@
 language: python
 python:
-    -3.5
+    - "3.5"
 
 install:
     - pip3 install -r requirements.txt
+      
+#before_script:
+    #- psql
 
 script:
-    - python3 manage.py makemigrations
-    - python3 manage.py migrate
+    - pip3 freeze
+    #- python3 manage.py makemigrations
+    #- python3 manage.py migrate
+    #- python3 manage.py test
+
+branch:
+    only:
+        - master
+
+deploy:
+    provider: heroku
+    api_key:
+        secure: "e2735e76-e7a1-463c-a683-52d614c7b7ac"
+    app: tweetyapi-study

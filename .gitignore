@@ -2,3 +2,4 @@
 *.swp
 *.sqlite3
 000*.py
+staticfiles/

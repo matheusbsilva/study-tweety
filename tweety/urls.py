@@ -20,22 +20,24 @@ from rest_framework import routers, serializers, viewsets
 from rest_framework.urlpatterns import format_suffix_patterns
 from posts import views
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ('url', 'username', 'email', 'is_staff')
+# A way to serialize and show users
+#class UserSerializer(serializers.HyperlinkedModelSerializer):
+    #class Meta:
+        #model = User
+        #fields = ('url', 'username', 'email', 'is_staff')
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+#class UserViewSet(viewsets.ModelViewSet):
+    #queryset = User.objects.all()
+    #serializer_class = UserSerializer
 
-router = routers.DefaultRouter()
-router.register(r'users', UserViewSet) # Not using right now 
+#router = routers.DefaultRouter()
+#router.register(r'users', UserViewSet) # Not using right now 
 
 urlpatterns = [
     url(r'^posts/$', views.PostList.as_view()),
-    url(r'^users/$', UserViewSet), 
+    url(r'^users/$', views.UserList.as_view()), 
     url(r'^posts/(?P<pk>[0-9]+)/$', views.PostDetail.as_view()),
+    url(r'^users/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

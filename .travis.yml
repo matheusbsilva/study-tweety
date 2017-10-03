@@ -5,15 +5,10 @@ python:
 install:
     - pip3 install -r requirements.txt
       
-#before_script:
-    #- psql
-
 script:
-    - pip3 freeze
-    #- python3 manage.py makemigrations
-    #- python3 manage.py migrate
-    #- python3 manage.py test
-
+    - python3 manage.py makemigrations
+    - python3 manage.py migrate
+    - python3 manage.py test --noinput
 branch:
     only:
         - master
